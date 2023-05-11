@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace CAS.UI.Conrollers
+namespace CAS.UI.Controllers
 {
     public class HomeController : Controller
     {

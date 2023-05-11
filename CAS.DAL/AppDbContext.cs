@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CAS.DAL
 {
-    public class AppDbContext:DbContext
+    public class AppDbContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -21,3 +21,5 @@ namespace CAS.DAL
         public DbSet<Department> Department { get; set; }
     }
 }
+
+
