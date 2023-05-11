@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CAS.DAL
+namespace CAS.DAL.Data
 {
     public class AppDbContext : DbContext
     {
@@ -19,6 +19,9 @@ namespace CAS.DAL
         //Db Set
 
         public DbSet<Department> Department { get; set; }
+        public DbSet<Doctors> Doctors { get; set; }
+        public DbSet<Patients> Patients { get; set; }
+        public DbSet<Appointments> Appointments { get; set; }
     }
 }
 
