@@ -22,6 +22,8 @@ namespace CAS.BOL
         public string Speciallity { get; set; }
         public decimal Salary { get; set; }
         public int PhoneNo { get; set; }
+
+
         public virtual IEnumerable<Appointments> Appointments { get; set; }
     }
 }

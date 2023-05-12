@@ -1,6 +1,21 @@
+using CAS.BLL;
+using CAS.DAL;
+using CAS.DAL.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+
+#region DALRegion
+builder.Services.AddTransient<IDoctorsDb, DoctorsDb>();
+#endregion
+
+#region BLLRegion
+builder.Services.AddTransient<IDoctorsBs, DoctorsBs>();
+#endregion
+
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(@"Server=MEHROZQAZI-PC\SQLEXPRESS;Database=ClinicAppointmentSystem;Trusted_Connection=True"));
 
 var app = builder.Build();
 

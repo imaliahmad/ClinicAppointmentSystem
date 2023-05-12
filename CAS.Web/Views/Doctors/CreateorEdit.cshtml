@@ -1,0 +1,93 @@
+﻿@model CAS.BOL.Doctors
+@{
+    ViewData["Title"] = "CreateorEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/doctors/doctors-create-edit.css" rel="stylesheet"/>
+@if (TempData["ErrorMessage"] != null)
+{
+  <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+<div class="container">
+    <br />
+    @if (Model.DId > 0)
+    {
+      <h1>Edit Doctor</h1>
+    }
+    else
+    {
+      <h1>Create Doctor</h1>
+    }
+    <br />
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="CreateorEdit">
+                <input type="hidden" asp-for="DId" />
+                <div class="row row-1">
+                    <div class="col-md-2">
+                       <label asp-for="Name" class="control-label"></label>
+                    </div>
+                    <div class="col-md-6">
+                       <input asp-for="Name" class="form-control" />
+                       <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <br />
+                <div class="row row-1">
+                    <div class="col-md-2">
+                       <label asp-for="Degree" class="control-label"></label>
+                    </div>
+                    <div class="col-md-6">
+                       <input asp-for="Degree" class="form-control" />
+                       <span asp-validation-for="Degree" class="text-danger"></span>
+                    </div>
+                </div>
+                <br />
+                <div class="row row-1">
+                    <div class="col-md-2">
+                       <label asp-for="Speciallity" class="control-label"></label>
+                    </div>
+                    <div class="col-md-6">
+                       <input asp-for="Speciallity" class="form-control" />
+                       <span asp-validation-for="Speciallity" class="text-danger"></span>
+                    </div>
+                </div>
+                <br />
+                <div class="row row-1">
+                    <div class="col-md-2">
+                       <label asp-for="Salary" class="control-label"></label>
+                    </div>
+                    <div class="col-md-6">
+                       <input asp-for="Salary" class="form-control" />
+                       <span asp-validation-for="Salary" class="text-danger"></span>
+                    </div>
+                </div>
+                <br />
+                <div class="row row-1">
+                    <div class="col-md-2">
+                       <label asp-for="PhoneNo" class="control-label"></label>
+                    </div>
+                    <div class="col-md-6">
+                       <input type="text" asp-for="PhoneNo" class="form-control" />
+                       <span asp-validation-for="PhoneNo" class="text-danger"></span>
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    @if (Model.DId > 0)
+                    {
+                       <button type="submit" class="btn btn-primary">Update</button>
+                    }
+                    else
+                    {
+                       <button type="submit" class="btn btn-primary">Create</button>
+                    }
+                </div>
+            </form>
+            <hr />
+        </div>
+    </div>
+</div>
+
