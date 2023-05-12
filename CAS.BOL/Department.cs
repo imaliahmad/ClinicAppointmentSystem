@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CAS.BOL
 {
-    [Table("Department")]
+    [Table("Departments")]
     public class Department
     {
         [Key]
