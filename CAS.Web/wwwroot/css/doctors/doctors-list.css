@@ -1,0 +1,19 @@
+﻿body {
+}
+.create-btn {
+    text-decoration: none;
+    color: #3c3c1f;
+    font-weight:bold;
+}
+.create-btn:hover {
+    text-decoration: none;
+    color: #3c3c1f;
+    font-weight: bold;
+}
+
+.color {
+    color: red;
+}
+.color:hover {
+    color: red;
+}
