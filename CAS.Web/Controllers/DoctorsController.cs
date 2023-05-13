@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CAS.Web.Controllers
 {
+    //Exception Handling
     public class DoctorsController : Controller
     {
         private readonly IDoctorsBs objDoctorsBs;
@@ -13,14 +14,21 @@ namespace CAS.Web.Controllers
         }
         public IActionResult Index()
         {
-            var list = objDoctorsBs.GetAll();
-            return View(list);
+            try
+            {                
+                var list = objDoctorsBs.GetAll();
+                return View(list);
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                TempData["ErrorMessage"] = msg;
+                return View();
+            }
         }
         [HttpGet]
         public IActionResult CreateorEdit(int id)
         {
-            TempData["ErrorMessage"] = null;
-
                 Doctors obj = new Doctors();
 
                 if (id > 0)
@@ -35,14 +43,15 @@ namespace CAS.Web.Controllers
             ModelState.Remove("Appointments");
             if(ModelState.IsValid)
             { 
-                // Update Doctor
+               
                 if (model.DId > 0)
                 {
+                    // Update Doctor
                     objDoctorsBs.Update(model);
-                }
-                //Insert Doctor
+                }               
                 else
                 {
+                    //Insert Doctor
                     objDoctorsBs.Insert(model);
                 }
                 return RedirectToAction(nameof(Index));
@@ -54,8 +63,7 @@ namespace CAS.Web.Controllers
             }
         }
         public IActionResult Details(int id)
-        {
-           
+        {           
                 Doctors obj = new Doctors();
 
                 if (id > 0)

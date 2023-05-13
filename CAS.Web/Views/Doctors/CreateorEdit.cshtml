@@ -76,14 +76,13 @@
                 </div>
                 <br />
                 <div class="form-group">
-                    @if (Model.DId > 0)
-                    {
-                       <button type="submit" class="btn btn-primary">Update</button>
+                    @{
+                        string buttonText = string.Empty;
+                        if (Model.DId > 0)  buttonText = "Update";
+                        else buttonText = "Create";
                     }
-                    else
-                    {
-                       <button type="submit" class="btn btn-primary">Create</button>
-                    }
+                    <button type="submit" class="btn btn-primary">@buttonText</button>
+                  
                 </div>
             </form>
             <hr />
