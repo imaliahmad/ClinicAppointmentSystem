@@ -23,5 +23,7 @@ namespace CAS.BOL
         public int PhoneNo { get; set; }
 
         public virtual IEnumerable<Appointments> Appointments { get; set; }
+        
+       
     }
 }

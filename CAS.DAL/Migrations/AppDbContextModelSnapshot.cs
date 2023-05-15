@@ -40,6 +40,10 @@ namespace CAS.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("AppStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("DId")
                         .HasColumnType("int");
 
@@ -79,7 +83,7 @@ namespace CAS.DAL.Migrations
 
                     b.HasKey("DeptId");
 
-                    b.ToTable("Department");
+                    b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("CAS.BOL.Doctors", b =>

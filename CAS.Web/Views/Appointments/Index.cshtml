@@ -1,0 +1,94 @@
+﻿
+@model IEnumerable<CAS.BOL.Appointments>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/appointments/appointments-list.css" rel="stylesheet"/>
+<div class="container">
+    <br />
+    @if (TempData["ErrorMessage"] != null)
+    {
+       <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+    <h1 class="text-center">Appointments List</h1>
+    <p>
+      <a asp-action="CreateorEdit"class="create-btn">Create New</a>
+    </p>
+   <table class="table table-bordered table-hover table-striped">
+       <thead>
+           <tr>
+               <th>
+                    @Html.DisplayNameFor(model => model.AppNo)
+               </th>
+               <th>
+                    Patient Name
+               </th>
+               <th>
+                    Doctor Name
+               </th>
+               <th>
+                    @Html.DisplayNameFor(model => model.AppDateTime)
+               </th>
+               <th>
+                    @Html.DisplayNameFor(model => model.DrFee)
+               </th>
+               <th>
+                    @Html.DisplayNameFor(model => model.Discount)
+               </th>
+               <th>
+                    @Html.DisplayNameFor(model => model.AfterDiscount)
+               </th>
+               <th>
+                    @Html.DisplayNameFor(model => model.FeeStatus)
+               </th>
+               <th>
+                    @Html.DisplayNameFor(model => model.AppStatus)
+               </th>
+               <th>Actions</th>
+           </tr>
+       </thead>
+       <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AppNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Patients.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Doctors.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AppDateTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DrFee)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Discount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AfterDiscount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FeeStatus)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AppStatus)
+                    </td>
+                    <td>
+                        <a asp-action="CreateorEdit" class="color" asp-route-id="@item.AppId">Edit</a> |
+                        <a asp-action="Details" class="color" asp-route-id="@item.AppId">Details</a> 
+                    </td>
+                </tr>
+            }
+       </tbody>
+
+   </table>
+
+</div>
+
+
