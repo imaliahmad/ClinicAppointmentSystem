@@ -7,8 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Mvc;
-using SelectList = System.Web.Mvc.SelectList;
+
 
 namespace CAS.BOL
 {
