@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CAS.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230511181559_initialcreate")]
+    [Migration("20230515175044_initialcreate")]
     partial class initialcreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,6 +39,10 @@ namespace CAS.DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("AppNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AppStatus")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -81,7 +85,7 @@ namespace CAS.DAL.Migrations
 
                     b.HasKey("DeptId");
 
-                    b.ToTable("Department");
+                    b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("CAS.BOL.Doctors", b =>

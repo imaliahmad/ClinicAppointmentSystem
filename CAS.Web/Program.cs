@@ -10,14 +10,16 @@ builder.Services.AddControllersWithViews();
 #region DALRegion
 builder.Services.AddTransient<IDoctorsDb, DoctorsDb>();
 builder.Services.AddTransient<IPatientsDb, PatientsDb>();
+builder.Services.AddTransient<IAppointmentsDb, AppointmentsDb>();
 #endregion
 
 #region BLLRegion
 builder.Services.AddTransient<IDoctorsBs, DoctorsBs>();
 builder.Services.AddTransient<IPatientsBs, PatientsBs>();
+builder.Services.AddTransient<IAppointmentsBs, AppointmentsBs>();
 #endregion
 
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(@"Server=MEHROZQAZI-PC\SQLEXPRESS;Database=ClinicAppointmentSystem;Trusted_Connection=True"));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(@"Server=MEHROZQAZI-PC\SQLEXPRESS;Database=ClinicAppointmentSystemB;Trusted_Connection=True"));
 
 var app = builder.Build();
 

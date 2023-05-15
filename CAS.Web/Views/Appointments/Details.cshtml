@@ -1,0 +1,128 @@
+﻿
+@model CAS.BOL.Appointments
+@{
+    ViewData["Title"] = "CreateorEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/appointments/appointments-create-edit.css" rel="stylesheet"/>
+@if (TempData["ErrorMessage"] != null)
+{
+       <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+<div class="container">
+    <br />
+    <h1>Details Appointment</h1>
+    <br />
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="CreateorEdit">
+                <input type="hidden" asp-for="AppId" />
+                <div class="row row-1">
+                    <div class="col-md-2">
+                       <label asp-for="AppNo" class="control-label"></label>
+                    </div>
+                    <div class="col-md-6">
+                       <input asp-for="AppNo" disabled class="form-control" />
+                       <span asp-validation-for="AppNo" class="text-danger"></span>
+                    </div>
+                </div>
+                <br />
+                <div class="row row-1">
+                    <div class="col-md-2">
+                       <label asp-for="PId" class="control-label"></label>
+                    </div>
+                    <div class="col-md-6">
+                      <select class= "form-control" disabled asp-for="PId" asp-items="Model.PatientsList">
+                        <option> ---  Select --- </option>
+                      </select>
+                    </div>
+                </div>
+                <br />
+                <div class="row row-1">
+                    <div class="col-md-2">
+                       <label asp-for="DId" class="control-label"></label>
+                    </div>
+                    <div class="col-md-6">
+                       <select class= "form-control" disabled asp-for="DId" asp-items="Model.DoctorsList">
+                         <option> ---  Select --- </option>
+                       </select>
+                    </div>
+                </div>
+                <br />
+                <div class="row row-1">
+                    <div class="col-md-2">
+                       <label asp-for="AppDateTime" class="control-label"></label>
+                    </div>
+                    <div class="col-md-6">
+                       <input  asp-for="AppDateTime" disabled class="form-control" />
+                       <script>
+                          var datetimeInput = document.getElementById("AppDateTime");
+                          var now = new Date();
+                          datetimeInput.value = now.toISOString().slice(0, 19).replace('T', ' ');
+                       </script>
+                       <span asp-validation-for="AppDateTime" class="text-danger"></span>
+                    </div>
+                </div>
+                <br />
+                <div class="row row-1">
+                    <div class="col-md-2">
+                       <label asp-for="DrFee" class="control-label"></label>
+                    </div>
+                    <div class="col-md-6">
+                       <input asp-for="DrFee" disabled class="form-control" />
+                       <span asp-validation-for="DrFee" class="text-danger"></span>
+                    </div>
+                </div>
+                <br />
+                <div class="row row-1">
+                    <div class="col-md-2">
+                       <label asp-for="Discount" class="control-label"></label>
+                    </div>
+                    <div class="col-md-6">
+                       <input asp-for="Discount" disabled class="form-control" />
+                       <span asp-validation-for="Discount" class="text-danger"></span>
+                    </div>
+                </div>
+                <br />
+                <div class="row row-1">
+                    <div class="col-md-2">
+                       <label asp-for="AfterDiscount" class="control-label"></label>
+                    </div>
+                    <div class="col-md-6">
+                       <input asp-for="AfterDiscount" disabled class="form-control" />
+                       <span asp-validation-for="AfterDiscount" class="text-danger"></span>
+                    </div>
+                </div>
+                <br />
+                <div class="row row-1">
+                    <div class="col-md-2">
+                       <label asp-for="FeeStatus" class="control-label"></label>
+                    </div>
+                    <div class="col-md-6">
+                       <input type="text" asp-for="FeeStatus" disabled class="form-control" />
+                       <span asp-validation-for="FeeStatus" class="text-danger"></span>
+                    </div>
+                </div>
+                <br />
+                <div class="row row-1">
+                    <div class="col-md-2">
+                       <label asp-for="AppStatus" class="control-label"></label>
+                    </div>
+                    <div class="col-md-6">
+                       <input type="text" asp-for="AppStatus" disabled class="form-control" />
+                       <span asp-validation-for="AppStatus" class="text-danger"></span>
+                    </div>
+                </div>
+                <br />
+            </form>
+            <hr />
+        </div>
+    </div>
+</div>
+
+
+
+
+

@@ -10,7 +10,7 @@ namespace CAS.DAL.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Department",
+                name: "Departments",
                 columns: table => new
                 {
                     DeptId = table.Column<int>(type: "int", nullable: false)
@@ -19,7 +19,7 @@ namespace CAS.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Department", x => x.DeptId);
+                    table.PrimaryKey("PK_Departments", x => x.DeptId);
                 });
 
             migrationBuilder.CreateTable(
@@ -68,7 +68,8 @@ namespace CAS.DAL.Migrations
                     DrFee = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Discount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     AfterDiscount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    FeeStatus = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    FeeStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AppStatus = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -104,7 +105,7 @@ namespace CAS.DAL.Migrations
                 name: "Appointments");
 
             migrationBuilder.DropTable(
-                name: "Department");
+                name: "Departments");
 
             migrationBuilder.DropTable(
                 name: "Doctors");

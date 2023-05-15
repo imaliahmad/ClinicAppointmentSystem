@@ -1,5 +1,6 @@
 ﻿using CAS.BOL;
 using CAS.DAL.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,27 @@ namespace CAS.DAL
         public IEnumerable<Appointments> GetAll()
         {
             // Add,Update,Remove
-            return context.Appointments;
+            var list = context.Appointments
+                          .Include(p => p.Patients)
+                          .Include(d => d.Doctors)
+                          .Select(x => new Appointments()
+                          {
+                              AppId = x.AppId,
+                              AppNo= x.AppNo,
+                              PId = x.PId,
+                              Patients = x.Patients,
+                              DId = x.DId,
+                              Doctors = x.Doctors,
+                              AppDateTime= x.AppDateTime,
+                              DrFee= x.DrFee,
+                              Discount=x.Discount,
+                              AfterDiscount=x.AfterDiscount,
+                              FeeStatus= x.FeeStatus,
+                              AppStatus= x.AppStatus,
+
+                          }).ToList();
+
+            return list;
         }
         public Appointments GetById(int id)
         {
