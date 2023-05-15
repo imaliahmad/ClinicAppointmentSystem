@@ -1,28 +1,29 @@
-﻿@model CAS.BOL.Doctors
+﻿
+@model CAS.BOL.Patients
 @{
     ViewData["Title"] = "CreateorEdit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link href="~/css/doctors/doctors-create-edit.css" rel="stylesheet"/>
+<link href="~/css/patients/patients-create-edit.css" rel="stylesheet"/>
 @if (TempData["ErrorMessage"] != null)
 {
-  <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+   <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
 }
 <div class="container">
     <br />
     @{
         string titleText = string.Empty;
-        if (Model.DId > 0) titleText = "Edit Doctor";
-        else titleText = "Create Doctor";
-     }
+        if (Model.PId > 0) titleText = "Edit Patient";
+        else titleText="Create Patient";
+    }
     <h1>@titleText</h1>
     <br />
     <hr />
     <div class="row">
         <div class="col-md-4">
             <form asp-action="CreateorEdit">
-                <input type="hidden" asp-for="DId" />
+                <input type="hidden" asp-for="PId" />
                 <div class="row row-1">
                     <div class="col-md-2">
                        <label asp-for="Name" class="control-label"></label>
@@ -35,31 +36,21 @@
                 <br />
                 <div class="row row-1">
                     <div class="col-md-2">
-                       <label asp-for="Degree" class="control-label"></label>
+                       <label asp-for="Address" class="control-label"></label>
                     </div>
                     <div class="col-md-6">
-                       <input asp-for="Degree" class="form-control" />
-                       <span asp-validation-for="Degree" class="text-danger"></span>
+                       <input asp-for="Address" class="form-control" />
+                       <span asp-validation-for="Address" class="text-danger"></span>
                     </div>
                 </div>
                 <br />
                 <div class="row row-1">
                     <div class="col-md-2">
-                       <label asp-for="Speciallity" class="control-label"></label>
+                       <label asp-for="City" class="control-label"></label>
                     </div>
                     <div class="col-md-6">
-                       <input asp-for="Speciallity" class="form-control" />
-                       <span asp-validation-for="Speciallity" class="text-danger"></span>
-                    </div>
-                </div>
-                <br />
-                <div class="row row-1">
-                    <div class="col-md-2">
-                       <label asp-for="Salary" class="control-label"></label>
-                    </div>
-                    <div class="col-md-6">
-                       <input asp-for="Salary" class="form-control" />
-                       <span asp-validation-for="Salary" class="text-danger"></span>
+                       <input asp-for="City" class="form-control" />
+                       <span asp-validation-for="City" class="text-danger"></span>
                     </div>
                 </div>
                 <br />
@@ -74,17 +65,17 @@
                 </div>
                 <br />
                 <div class="form-group">
-                    @{
-                        string buttonText = string.Empty;
-                        if (Model.DId > 0)  buttonText = "Update";
-                        else buttonText = "Create";
-                    }
+                  @{
+                      string buttonText = string.Empty;
+                      if (Model.PId > 0) buttonText = "Update";
+                      else buttonText = "Create";
+                   }
                     <button type="submit" class="btn btn-primary">@buttonText</button>
-                  
                 </div>
             </form>
             <hr />
         </div>
     </div>
 </div>
+
 
