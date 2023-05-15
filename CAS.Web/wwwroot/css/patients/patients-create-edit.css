@@ -1,0 +1,24 @@
+﻿body {
+}
+.row-1 {
+    margin-left: 20px;
+}
+
+.col-md-6 {
+    margin-left: 80px;
+    width: 60%;
+}
+
+.form-group {
+    margin-left: 175px;
+}
+
+.btn-primary {
+    background: #3c3c1f;
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #3c3c1f;
+    border: none;
+}

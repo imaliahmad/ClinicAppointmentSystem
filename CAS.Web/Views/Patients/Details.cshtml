@@ -1,0 +1,66 @@
+﻿
+@model CAS.BOL.Patients
+@{
+    ViewData["Title"] = "CreateorEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/patients/patients-create-edit.css" rel="stylesheet"/>
+<div class="container">
+    <br />
+    <h1>Details Patient</h1>
+    <br />
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="CreateorEdit">
+                <input type="hidden" asp-for="PId" />
+                <div class="row row-1">
+                    <div class="col-md-2">
+                       <label asp-for="Name" class="control-label"></label>
+                    </div>
+                    <div class="col-md-6">
+                       <input asp-for="Name" disabled class="form-control" />
+                       <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <br />
+                <div class="row row-1">
+                    <div class="col-md-2">
+                       <label asp-for="Address" class="control-label"></label>
+                    </div>
+                    <div class="col-md-6">
+                       <input asp-for="Address"disabled class="form-control" />
+                       <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                </div>
+                <br />
+                <div class="row row-1">
+                    <div class="col-md-2">
+                       <label asp-for="City" class="control-label"></label>
+                    </div>
+                    <div class="col-md-6">
+                       <input asp-for="City" disabled class="form-control" />
+                       <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                </div>
+                <br />
+                <div class="row row-1">
+                    <div class="col-md-2">
+                       <label asp-for="PhoneNo" class="control-label"></label>
+                    </div>
+                    <div class="col-md-6">
+                       <input type="text" asp-for="PhoneNo"disabled class="form-control" />
+                       <span asp-validation-for="PhoneNo" class="text-danger"></span>
+                    </div>
+                </div>
+                <br />
+            </form>
+            <hr />
+        </div>
+    </div>
+</div>
+
+
+
+

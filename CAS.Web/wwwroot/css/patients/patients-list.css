@@ -3,8 +3,9 @@
 .create-btn {
     text-decoration: none;
     color: #3c3c1f;
-    font-weight:bold;
+    font-weight: bold;
 }
+
 .create-btn:hover {
     text-decoration: none;
     color: #3c3c1f;
@@ -13,8 +14,9 @@
 
 .color {
     color: red;
-    text-decoration:none;
+    text-decoration: none;
 }
+
 .color:hover {
     color: red;
     text-decoration: none;

@@ -70,7 +70,8 @@ namespace CAS.Web.Controllers
                 {
                     obj = objDoctorsBs.GetById(id);
                 }
-                return View(obj);   
+                return View(obj);
+           
         }
 
     }
