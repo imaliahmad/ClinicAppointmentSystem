@@ -3,6 +3,184 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h1>Home Page</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+        <h1 class="text-center">Doctor's</h1>
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Degree</th>
+                    <th>Speciallity</th>
+                    <th>PhoneNo</th>
+                </tr>
 
+            </thead>
+            <tbody id="doctorslist">
+            </tbody>
+        </table>
+
+    </div>
+    <div class="col-md-6">
+        <h1 class="text-center">Patient's</h1>
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>PhoneNo</th>
+                </tr>
+
+            </thead>
+            <tbody id="patientslist">
+            </tbody>
+        </table>
+     </div>
+ </div>
+</div>
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="text-center">Appointment's</h1>
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>AppNo</th>
+                    <th>PatientName</th>
+                    <th>DoctorName</th>
+                    <th>DateTime</th>
+                    <th>DrFee</th>
+                    <th>Discount</th>
+                    <th>BiilAmt</th>
+                </tr>
+
+            </thead>
+            <tbody id="appointmentslist">
+
+            </tbody>
+        </table>
+      </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+    loadDoctors();
+
+    function loadDoctors() {
+        $.ajax({
+            url: '/Doctors/GetDoctors/', 
+            type: 'GET',
+            success: function(result) {
+                 
+                var doctors = result; 
+                console.log(doctors);
+                debugger;
+                $('#doctorslist').empty();
+
+                var rows= '';
+                for(var item of doctors) 
+                {
+                   var row = '<tr>' +
+                                '<td>' + item.name + '</td>' +
+                                '<td>' + item.degree + '</td>' +
+                                '<td>' + item.speciallity + '</td>' +
+                                '<td>' + item.phoneNo + '</td>' +
+                                '</tr>';
+                    rows += row;
+
+                }
+
+                $('#doctorslist').append(rows);
+               
+            },
+            error: function(error){
+                console.log(error);
+            }
+        });
+    }
+});
+</script>
+
+<script>
+    $(document).ready(function() {
+    loadPatients();
+
+    function loadPatients() {
+        $.ajax({
+            url: '/Patients/GetPatients/', 
+            type: 'GET',
+            success: function(result) {
+
+                var patients = result; 
+                console.log(patients);
+                debugger;
+                $('#patientslist').empty();
+
+                var rows= '';
+                for(var item of patients) 
+                {
+                   var row = '<tr>' +
+                                '<td>' + item.name + '</td>' +
+                                '<td>' + item.address + '</td>' +
+                                '<td>' + item.city + '</td>' +
+                                '<td>' + item.phoneNo + '</td>' +
+                                '</tr>';
+                    rows += row;
+
+                }
+
+                $('#patientslist').append(rows);
+
+            },
+            error: function(error){
+                console.log(error);
+            }
+        });
+    }
+  });
+</script>
+
+<script>
+    $(document).ready(function() {
+    loadAppointments();
+
+    function loadAppointments() {
+        $.ajax({
+            url: '/Appointments/GetAppointments/', 
+            type: 'GET',
+            success: function(result) {
+
+                var appointments = result; 
+                console.log(appointments);
+                debugger;
+                $('#appointmentslist').empty();
+
+                var rows= '';
+                for(var item of appointments) 
+                {
+                   var row = '<tr>' +
+                                '<td>' + item.appNo + '</td>' +
+                                '<td>' + item.patientName + '</td>' +
+                                '<td>' + item.doctorName + '</td>' +
+                                '<td>' + item.dateTime + '</td>' +
+                                '<td>' + item.drFee + '</td>' +
+                                '<td>' + item.discount + '</td>' +
+                                '<td>' + item.billAmt + '</td>' +
+                                '</tr>';
+                    rows += row;
+
+                }
+
+                $('#appointmentslist').append(rows);
+
+            },
+            error: function(error){
+                console.log(error);
+            }
+        });
+    }
+  });
+</script>

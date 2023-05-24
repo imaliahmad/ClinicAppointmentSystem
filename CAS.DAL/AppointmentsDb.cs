@@ -1,11 +1,14 @@
 ﻿using CAS.BOL;
 using CAS.DAL.Data;
+using Microsoft.Data.SqlClient.Server;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace CAS.DAL
 {
@@ -40,10 +43,10 @@ namespace CAS.DAL
                               Patients = x.Patients,
                               DId = x.DId,
                               Doctors = x.Doctors,
-                              AppDateTime= x.AppDateTime,
+                              DateTime= x.DateTime,
                               DrFee= x.DrFee,
                               Discount=x.Discount,
-                              AfterDiscount=x.AfterDiscount,
+                              BillAmt=x.BillAmt,
                               FeeStatus= x.FeeStatus,
                               AppStatus= x.AppStatus,
 
@@ -58,6 +61,7 @@ namespace CAS.DAL
         }
         public bool Insert(Appointments obj)
         {
+            obj.AppNo = GetUniqueAppointmentNumber(); //AP-210523-0002
             context.Appointments.Add(obj);
             context.SaveChanges();
             return true;
@@ -75,6 +79,62 @@ namespace CAS.DAL
             context.SaveChanges();
             return true;
         }
-    }
+
+        //GetUniqueAppointmentNumber ==> AP-200523-0005
+        public string GetUniqueAppointmentNumber()
+        {
+            string appointment = "AP";
+            string currentDate = DateTime.Now.ToString("ddMMyy");
+
+            string latestAppointmentNumber = context.Appointments
+                                                    .Where(a => a.AppNo.StartsWith(appointment + "-" + currentDate))
+                                                    .OrderByDescending(a => a.AppNo)
+                                                    .Select(a => a.AppNo)
+                                                    .FirstOrDefault();
+
+
+            //string latestAppointmentNumber = context.Appointments
+            //                                        .OrderByDescending(x => x.AppNo)
+            //                                        .FirstOrDefault()
+            //                                        .AppNo;
+
+            // D4 = 0000
+
+            int sequenceNumber = 1;
+            if (!string.IsNullOrEmpty(latestAppointmentNumber))
+            { 
+                string sequencePart = latestAppointmentNumber.Substring(10,4); // 0005 
+                sequenceNumber = Convert.ToInt32(sequencePart) + 1; //6
+            }
+            // string.format("", D4)
+
+                string newAppointmentNumber = $"{appointment}-{currentDate}-{sequenceNumber:D4}";
+                return newAppointmentNumber;
+
+        }
+       
+
+
+
+
+
+
+
+            //string result = "";
+
+        ////if (appiontment exist in database)
+        ////{ 
+        ////    //AP-210523-0006
+        ////    //split
+        ////}
+        ////else
+        ////{
+        ////   // 0001
+        ////}
+
+
+        //return "";
+        }
 }
+
 

@@ -21,6 +21,7 @@ namespace CAS.DAL.Data
         public DbSet<Doctors> Doctors { get; set; }
         public DbSet<Patients> Patients { get; set; }
         public DbSet<Appointments> Appointments { get; set; }
+        
     }
 }
 

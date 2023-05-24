@@ -1,4 +1,5 @@
-﻿
+﻿@using CAS.BOL.DataTypes
+
 @model IEnumerable<CAS.BOL.Appointments>
 @{
     ViewData["Title"] = "Index";
@@ -28,7 +29,7 @@
                     Doctor Name
                </th>
                <th>
-                    @Html.DisplayNameFor(model => model.AppDateTime)
+                    @Html.DisplayNameFor(model => model.DateTime)
                </th>
                <th>
                     @Html.DisplayNameFor(model => model.DrFee)
@@ -37,7 +38,7 @@
                     @Html.DisplayNameFor(model => model.Discount)
                </th>
                <th>
-                    @Html.DisplayNameFor(model => model.AfterDiscount)
+                    @Html.DisplayNameFor(model => model.BillAmt)
                </th>
                <th>
                     @Html.DisplayNameFor(model => model.FeeStatus)
@@ -62,7 +63,7 @@
                         @Html.DisplayFor(modelItem => item.Doctors.Name)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.AppDateTime)
+                        @Html.DisplayFor(modelItem => item.DateTime)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.DrFee)
@@ -71,13 +72,41 @@
                         @Html.DisplayFor(modelItem => item.Discount)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.AfterDiscount)
+                        @Html.DisplayFor(modelItem => item.BillAmt)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.FeeStatus)
+                       @if(item.FeeStatus == null)
+                       {
+                         <span class="text-warning">Unpaid</span>
+                       }
+                       @if (item.FeeStatus == FeeStatusTypes.Unpaid)
+                       {
+                         <span class="text-warning">Unpaid</span>
+                       }
+                       else if(item.FeeStatus == FeeStatusTypes.Paid)
+                       {
+                         <span class="text-warning">Paid</span>
+                       }
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.AppStatus)
+                        @if (item.AppStatus == null)
+                        {
+                           <span class="text-warning">Pending</span>
+                        }
+                        @if (item.AppStatus == AppStatusTypes.Pending)
+                        {
+                           <span class="text-warning">Pending</span>
+                        }
+                        else if (item.AppStatus == AppStatusTypes.Confirmed)
+                        {
+                           <span class="text-success">Confirmed</span>
+                        }
+                        else if (item.AppStatus == AppStatusTypes.Cancelled)
+                        {
+                           <span class="text-danger">Cancelled</span>
+                        }
+                        
+                       
                     </td>
                     <td>
                         <a asp-action="CreateorEdit" class="color" asp-route-id="@item.AppId">Edit</a> |

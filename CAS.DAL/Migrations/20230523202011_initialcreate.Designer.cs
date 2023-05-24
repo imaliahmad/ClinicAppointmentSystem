@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CAS.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230515175044_initialcreate")]
+    [Migration("20230523202011_initialcreate")]
     partial class initialcreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,22 +32,21 @@ namespace CAS.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AppId"), 1L, 1);
 
-                    b.Property<decimal>("AfterDiscount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("AppDateTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("AppNo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AppStatus")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("AppStatus")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("BillAmt")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("DId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal>("Discount")
                         .HasColumnType("decimal(18,2)");
@@ -55,9 +54,8 @@ namespace CAS.DAL.Migrations
                     b.Property<decimal>("DrFee")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("FeeStatus")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("FeeStatus")
+                        .HasColumnType("int");
 
                     b.Property<int>("PId")
                         .HasColumnType("int");
@@ -96,23 +94,22 @@ namespace CAS.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DId"), 1L, 1);
 
-                    b.Property<string>("Degree")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Degree")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("DrFee")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PhoneNo")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Salary")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Speciallity")
+                    b.Property<string>("PhoneNo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Speciallity")
+                        .HasColumnType("int");
 
                     b.HasKey("DId");
 
@@ -139,8 +136,9 @@ namespace CAS.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PhoneNo")
-                        .HasColumnType("int");
+                    b.Property<string>("PhoneNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PId");
 

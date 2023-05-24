@@ -20,7 +20,7 @@ namespace CAS.BOL
         [Required(ErrorMessage = "Address is required")]
         public string Address { get; set; }
         public string City { get; set; }
-        public int PhoneNo { get; set; }
+        public string PhoneNo { get; set; }
 
         public virtual IEnumerable<Appointments> Appointments { get; set; }
         

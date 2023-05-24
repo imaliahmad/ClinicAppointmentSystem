@@ -43,6 +43,14 @@
         "webfonts/fa-v4compatibility.ttf",
         "webfonts/fa-v4compatibility.woff2"
       ]
+    },
+    {
+      "library": "notyf@3.10.0",
+      "destination": "wwwroot/notyf/",
+      "files": [
+        "notyf.min.js",
+        "notyf.min.css"
+      ]
     }
   ]
 }

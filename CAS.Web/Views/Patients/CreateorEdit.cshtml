@@ -4,8 +4,10 @@
     ViewData["Title"] = "CreateorEdit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/javascript/site.js"></script>
 
 <link href="~/css/patients/patients-create-edit.css" rel="stylesheet"/>
+
 @if (TempData["ErrorMessage"] != null)
 {
    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
@@ -19,6 +21,14 @@
     }
     <h1>@titleText</h1>
     <br />
+    <div>
+        <script>
+           function goBack() {
+              window.location.href='/Patients';
+           }
+        </script>
+        <button type="button" class="btn btn-warning" onclick="goBack()">Back to List</button>
+    </div>
     <hr />
     <div class="row">
         <div class="col-md-4">
@@ -70,7 +80,7 @@
                       if (Model.PId > 0) buttonText = "Update";
                       else buttonText = "Create";
                    }
-                    <button type="submit" class="btn btn-primary">@buttonText</button>
+                    <button type="submit" id="btnSave" class="btn btn-primary">@buttonText</button>
                 </div>
             </form>
             <hr />
@@ -78,4 +88,11 @@
     </div>
 </div>
 
+<script>
+ $(document).ready(function () {
+     $('#btnSave').click(function() {
+         notyf.open ({ type:'success', message:'Doctor is saved.' });
+     });
+ });
+</script>
 

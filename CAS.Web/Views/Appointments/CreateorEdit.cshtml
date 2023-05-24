@@ -4,8 +4,10 @@
     ViewData["Title"] = "CreateorEdit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/javascript/site.js"></script>
 
-<link href="~/css/appointments/appointments-create-edit.css" rel="stylesheet"/>
+<link href="~/css/doctors/doctors-create-edit.css" rel="stylesheet"/>
+
 @if (TempData["ErrorMessage"] != null)
 {
    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
@@ -24,7 +26,9 @@
         <div class="col-md-4">
             <form asp-action="CreateorEdit">
                 <input type="hidden" asp-for="AppId" />
-                <div class="row row-1">
+                @if(Model.AppId > 0)
+                {
+                 <div class="row row-1">
                     <div class="col-md-2">
                        <label asp-for="AppNo" class="control-label"></label>
                     </div>
@@ -32,7 +36,9 @@
                        <input asp-for="AppNo" class="form-control" />
                        <span asp-validation-for="AppNo" class="text-danger"></span>
                     </div>
-                </div>
+                 </div>
+                }
+                
                 <br />
                 <div class="row row-1">
                     <div class="col-md-2">
@@ -58,11 +64,11 @@
                 <br />
                 <div class="row row-1">
                     <div class="col-md-2">
-                       <label asp-for="AppDateTime" class="control-label"></label>
+                       <label asp-for="DateTime" class="control-label"></label>
                     </div>
                     <div class="col-md-6">
-                       <input  asp-for="AppDateTime" id="datetime" class="form-control" />
-                       <span asp-validation-for="AppDateTime" class="text-danger"></span>
+                       <input  asp-for="DateTime" id="datetime" class="form-control" />
+                       <span asp-validation-for="DateTime" class="text-danger"></span>
                        <script>
                           var datetimeInput = document.getElementById("datetime");
                           var now = new Date();
@@ -78,8 +84,7 @@
                        <label asp-for="DrFee" class="control-label"></label>
                     </div>
                     <div class="col-md-6">
-                       <input asp-for="DrFee" class="form-control" />
-                       <span asp-validation-for="DrFee" class="text-danger"></span>
+                      <input class="form-control" asp-for="DrFee" readonly />
                     </div>
                 </div>
                 <br />
@@ -95,31 +100,11 @@
                 <br />
                 <div class="row row-1">
                     <div class="col-md-2">
-                       <label asp-for="AfterDiscount" class="control-label"></label>
+                       <label asp-for="BillAmt" class="control-label"></label>
                     </div>
                     <div class="col-md-6">
-                       <input asp-for="AfterDiscount" class="form-control" />
-                       <span asp-validation-for="AfterDiscount" class="text-danger"></span>
-                    </div>
-                </div>
-                <br />
-                <div class="row row-1">
-                    <div class="col-md-2">
-                       <label asp-for="FeeStatus" class="control-label"></label>
-                    </div>
-                    <div class="col-md-6">
-                       <input type="text" asp-for="FeeStatus" class="form-control" />
-                       <span asp-validation-for="FeeStatus" class="text-danger"></span>
-                    </div>
-                </div>
-                <br />
-                <div class="row row-1">
-                    <div class="col-md-2">
-                       <label asp-for="AppStatus" class="control-label"></label>
-                    </div>
-                    <div class="col-md-6">
-                       <input type="text" asp-for="AppStatus" class="form-control" />
-                       <span asp-validation-for="AppStatus" class="text-danger"></span>
+                       <input asp-for="BillAmt" class="form-control" readonly />
+                       <span asp-validation-for="BillAmt" class="text-danger"></span>
                     </div>
                 </div>
                 <br />
@@ -129,7 +114,7 @@
                         if (Model.PId > 0) buttonText = "Update";
                         else buttonText = "Create";
                     }
-                    <button type="submit" class="btn btn-primary">@buttonText</button>
+                    <button type="submit" id="btnSave" class="btn btn-primary">@buttonText</button>
                 </div>
             </form>
             <hr />
@@ -137,9 +122,56 @@
     </div>
 </div>
 
+ <script>
+     $(document).ready(function () {
+
+       $('#DId').change(function () {
+            debugger;
+         var selectedDoctorId = $(this).val();
+         if (selectedDoctorId !== '') {
+           $.ajax({
+             url: '/Doctors/GetDrFee/' + selectedDoctorId,
+             type: 'GET',
+             success: function (fee) {
+                 $('#DrFee').val(fee);
+             },
+             error: function () {
+                 console.log('Error occurred.');
+             }
+           });
+         }
+       });
+     });
+ </script>
+ <script>
+     $(document).ready(function () {
+        $('#Discount').change(function () {
+            var discount = parseFloat($(this).val());
+            var drFee = parseFloat($('#DrFee').val());
+
+            if (!isNaN(discount) && !isNaN(drFee)) {
+                var BillAmt = drFee - discount;
+                $('#BillAmt').val(BillAmt.toFixed(2));
+            }
+        });
+    });
+ </script>
+ <script>
+ //$(function(){
+ 
+ //});
+
+ //$(() => {}
+ 
+ //);
 
 
-
+ $(document).ready(function () {
+     $('#btnSave').click(function() {
+         notyf.open ({ type:'success', message:'Appointment is saved.' });
+     });
+ });
+</script>
  
 
 
