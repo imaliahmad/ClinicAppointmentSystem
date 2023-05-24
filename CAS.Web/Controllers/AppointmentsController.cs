@@ -1,7 +1,9 @@
 ﻿using CAS.BLL;
 using CAS.BOL;
+using CAS.BOL.DataTypes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace CAS.Web.Controllers
 {
@@ -18,6 +20,9 @@ namespace CAS.Web.Controllers
             doctorsBs = _doctorsBs;
         }
 
+        /** 
+         * This function is used to get appointment list
+         **/
         public IActionResult Index()
         {
             try
@@ -33,54 +38,124 @@ namespace CAS.Web.Controllers
             }
 
         }
+
+        /** 
+         * This function is used to get appointment records
+         **/
+
         [HttpGet]
         public IActionResult CreateorEdit(int id)
         {
-            Appointments obj = new Appointments();
-            if (id > 0)
+            try
             {
-                obj = objAppointmentsBs.GetById(id);
-            }
-            // Get Object
-            obj.PatientsList = new SelectList(patientsBs.GetAll(), "PId", "Name");
-            obj.DoctorsList = new SelectList(doctorsBs.GetAll(), "DId", "Name");
-            return View(obj);
-        }
+                Appointments obj = new Appointments();
+                obj.AppStatus = AppStatusTypes.Pending;
+                obj.FeeStatus = FeeStatusTypes.Unpaid;
 
+                if (id > 0)
+                {
+                    obj = objAppointmentsBs.GetById(id);
+                }
+
+
+                obj.PatientsList = new SelectList(
+                                            patientsBs.GetAll(), "PId", "Name");
+
+                obj.DoctorsList = new SelectList(
+                                            doctorsBs.GetAll(), "DId", "Name");
+                return View(obj);
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                TempData["ErrorMessage"] = msg;
+                return View();
+            }
+           
+        }
+        /** 
+         * This function is used to create and edit appointment recordsB
+         **/
         [HttpPost]
         public IActionResult CreateorEdit(Appointments model)
         {
-            //remove validation
-            if (ModelState.IsValid)
+            try
             {
-                if (model.AppId > 0)
+                ModelState.Remove("AppNo");
+                ModelState.Remove("AppStatus");
+                ModelState.Remove("FeeStatus");
+                if (ModelState.IsValid)
                 {
-                    //Update Appointment
-                    objAppointmentsBs.Update(model);
+                    if (model.AppId > 0)
+                    {
+
+                        objAppointmentsBs.Update(model);
+                    }
+                    else
+                    {
+                        objAppointmentsBs.Insert(model);
+                    }
+                    return RedirectToAction("Index");
                 }
                 else
                 {
-                    //Insert Appointment
-                    objAppointmentsBs.Insert(model);
+                    var errors = ModelState.Values.SelectMany(v => v.Errors)
+                                          .Select(e => e.ErrorMessage);
+                    TempData["ErrorMessage"] = "Appointment is not Update/Insert";
+                    return View(model);
                 }
-                return RedirectToAction("Index");
             }
-            else
+            catch (Exception ex)
             {
-                TempData["ErrorMessage"] = "Appointment is not Update/Insert";
-                return View(model);
+                var msg = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                TempData["ErrorMessage"] = msg;
+                return View();
             }
         }
+
+        /** 
+       * This function is used to get appointment details
+       **/
         public IActionResult Details(int id)
         {
-            Appointments obj = new Appointments();
-            if (id > 0)
+            try
             {
-                obj = objAppointmentsBs.GetById(id);
+                Appointments obj = new Appointments();
+                obj.AppStatus = AppStatusTypes.Pending;
+                obj.FeeStatus = FeeStatusTypes.Unpaid;
+
+                if (id > 0)
+                {
+                    obj = objAppointmentsBs.GetById(id);
+                }
+
+
+                obj.PatientsList = new SelectList(
+                                            patientsBs.GetAll(), "PId", "Name");
+
+                obj.DoctorsList = new SelectList(
+                                            doctorsBs.GetAll(), "DId", "Name");
+                return View(obj);
             }
-            return View(obj);
+            catch (Exception ex)
+            {
+                var msg = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                TempData["ErrorMessage"] = msg;
+                return View();
+
+            }
 
         }
+
+        /** 
+        * This function is used to get appointments
+        **/
+        public JsonResult GetAppointments()
+        {
+            var doctors = objAppointmentsBs.GetAll();
+            return Json(doctors);
+        }
+
     }
 }
 

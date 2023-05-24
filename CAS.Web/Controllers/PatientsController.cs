@@ -14,6 +14,9 @@ namespace CAS.Web.Controllers
             objPatientsBs = _objPatientsBs;
         }
 
+        /** 
+         * This function is used to get patient list
+         **/
         public IActionResult Index()
         {
             try
@@ -29,49 +32,101 @@ namespace CAS.Web.Controllers
             }
            
         }
+
+        /** 
+         * This function is used to get patient records
+         **/
+
         [HttpGet]
         public IActionResult CreateorEdit(int id)
         {
-            Patients obj = new Patients();
-            if(id > 0)
+            try
             {
-                obj = objPatientsBs.GetById(id);
+                Patients obj = new Patients();
+                if (id > 0)
+                {
+                    obj = objPatientsBs.GetById(id);
+                }
+                return View(obj);
             }
-            return View(obj);
+            catch (Exception ex)
+            {
+                var msg = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                TempData["ErrorMessage"] = msg;
+                return View();
+            }
+           
         }
+
+        /** 
+         * This function is used to create and edit patient records
+         **/
+
         [HttpPost]
         public IActionResult CreateorEdit(Patients model)
         {
-            ModelState.Remove("Appointments");
-            if(ModelState.IsValid)
+            try
             {
-                if(model.PId > 0)
+                ModelState.Remove("Appointments");
+                if (ModelState.IsValid)
                 {
-                    //Update Patient
-                    objPatientsBs.Update(model);
+                    if (model.PId > 0)
+                    {
+                        objPatientsBs.Update(model);
+                    }
+                    else
+                    {
+                        objPatientsBs.Insert(model);
+                    }
+                    return RedirectToAction("Index");
                 }
                 else
                 {
-                    //Insert Patient
-                    objPatientsBs.Insert(model);
+                    TempData["ErrorMessage"] = "Patient is not Update/Insert";
+                    return View(model);
                 }
-                return RedirectToAction("Index");
             }
-            else
+            catch (Exception ex)
             {
-                TempData["ErrorMessage"] = "Patient is not Update/Insert";
-                return View(model);
-            } 
+                var msg = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                TempData["ErrorMessage"] = msg;
+                return View();
+            }
+           
         }
+
+        /** 
+        * This function is used to get patient details
+        **/
         public IActionResult Details(int id)
         {
-            Patients obj = new Patients();
-            if (id > 0)
+            try
             {
-                obj = objPatientsBs.GetById(id);
+                Patients obj = new Patients();
+                if (id > 0)
+                {
+                    obj = objPatientsBs.GetById(id);
+                }
+                return View(obj);
             }
-            return View(obj);
+            catch (Exception ex)
+            {
+                var msg = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                TempData["ErrorMessage"] = msg;
+                return View();
 
+            }
+            
         }
+
+       /** 
+       * This function is used to get patients
+       **/
+        public JsonResult GetPatients()
+        {
+            var patients = objPatientsBs.GetAll();
+            return Json(patients);
+        }
+
     }
 }

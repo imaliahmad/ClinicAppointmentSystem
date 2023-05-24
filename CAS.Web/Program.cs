@@ -19,7 +19,8 @@ builder.Services.AddTransient<IPatientsBs, PatientsBs>();
 builder.Services.AddTransient<IAppointmentsBs, AppointmentsBs>();
 #endregion
 
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(@"Server=MEHROZQAZI-PC\SQLEXPRESS;Database=ClinicAppointmentSystemB;Trusted_Connection=True"));
+builder.Services.AddDbContext<AppDbContext>(
+    options => options.UseSqlServer(@"Server=MEHROZQAZI-PC\SQLEXPRESS;Database=ClinicAppointmentSystemF;Trusted_Connection=True"));
 
 var app = builder.Build();
 

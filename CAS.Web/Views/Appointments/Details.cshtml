@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link href="~/css/appointments/appointments-create-edit.css" rel="stylesheet"/>
+<link href="~/css/doctors/doctors-create-edit.css" rel="stylesheet"/>
 @if (TempData["ErrorMessage"] != null)
 {
-       <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+           <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
 }
 <div class="container">
     <br />
@@ -53,16 +53,16 @@
                 <br />
                 <div class="row row-1">
                     <div class="col-md-2">
-                       <label asp-for="AppDateTime" class="control-label"></label>
+                       <label asp-for="DateTime" class="control-label"></label>
                     </div>
                     <div class="col-md-6">
-                       <input  asp-for="AppDateTime" disabled class="form-control" />
+                       <input  asp-for="DateTime" disabled class="form-control" />
                        <script>
                           var datetimeInput = document.getElementById("AppDateTime");
                           var now = new Date();
                           datetimeInput.value = now.toISOString().slice(0, 19).replace('T', ' ');
                        </script>
-                       <span asp-validation-for="AppDateTime" class="text-danger"></span>
+                       <span asp-validation-for="DateTime" class="text-danger"></span>
                     </div>
                 </div>
                 <br />
@@ -88,31 +88,11 @@
                 <br />
                 <div class="row row-1">
                     <div class="col-md-2">
-                       <label asp-for="AfterDiscount" class="control-label"></label>
+                       <label asp-for="BillAmt" class="control-label"></label>
                     </div>
                     <div class="col-md-6">
-                       <input asp-for="AfterDiscount" disabled class="form-control" />
-                       <span asp-validation-for="AfterDiscount" class="text-danger"></span>
-                    </div>
-                </div>
-                <br />
-                <div class="row row-1">
-                    <div class="col-md-2">
-                       <label asp-for="FeeStatus" class="control-label"></label>
-                    </div>
-                    <div class="col-md-6">
-                       <input type="text" asp-for="FeeStatus" disabled class="form-control" />
-                       <span asp-validation-for="FeeStatus" class="text-danger"></span>
-                    </div>
-                </div>
-                <br />
-                <div class="row row-1">
-                    <div class="col-md-2">
-                       <label asp-for="AppStatus" class="control-label"></label>
-                    </div>
-                    <div class="col-md-6">
-                       <input type="text" asp-for="AppStatus" disabled class="form-control" />
-                       <span asp-validation-for="AppStatus" class="text-danger"></span>
+                       <input asp-for="BillAmt" disabled class="form-control" />
+                       <span asp-validation-for="BillAmt" class="text-danger"></span>
                     </div>
                 </div>
                 <br />

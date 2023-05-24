@@ -16,6 +16,7 @@ namespace CAS.DAL
         bool Insert(Doctors obj);
         bool Update(Doctors obj);
         bool Delete(int id);
+        decimal GetDrFee(int id);
     }
     public class DoctorsDb : IDoctorsDb
     {
@@ -28,7 +29,8 @@ namespace CAS.DAL
         public IEnumerable<Doctors> GetAll()
         {
             // Add,Update,Remove
-            return context.Doctors;
+            
+            return context.Doctors.ToList();
         }
         public Doctors GetById(int id)
         {
@@ -36,7 +38,7 @@ namespace CAS.DAL
             return obj;
         }
         public bool Insert(Doctors obj)
-        {
+        {   
             context.Doctors.Add(obj);
             context.SaveChanges();
             return true;
@@ -54,6 +56,15 @@ namespace CAS.DAL
             context.SaveChanges();
             return true;
         }
+       
+        public decimal GetDrFee(int id)
+        {
+            var obj = context.Doctors.Where(x => x.DId == id).FirstOrDefault();
+            return obj.DrFee;
+        }
+       
+
+       
     }
 }
 

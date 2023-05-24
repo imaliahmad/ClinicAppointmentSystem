@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using CAS.BOL.DataTypes;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,8 +17,6 @@ namespace CAS.BOL
     {
         [Key]
         public int AppId { get; set; }
-
-        [Required(ErrorMessage = "Appointment no is required")]
         public string AppNo { get; set; }
 
         [ForeignKey("Patients")]
@@ -32,18 +31,14 @@ namespace CAS.BOL
         public int DId { get; set; }
         public virtual Doctors? Doctors { get; set; }
 
-        public DateTime AppDateTime { get; set; }
+        public DateTime DateTime { get; set; }
 
         [Required(ErrorMessage = "Dr Fee is required")]
         public decimal DrFee { get; set; }
         public decimal Discount { get; set; }
-        public decimal AfterDiscount { get; set; }
-
-        [Required(ErrorMessage = "Fee Status is required")]
-        public string FeeStatus { get; set; }
-
-        [Required(ErrorMessage = "Appointment Status is required")]
-        public string AppStatus { get; set; }
+        public decimal BillAmt { get; set; }
+        public FeeStatusTypes? FeeStatus { get; set; }
+        public AppStatusTypes? AppStatus { get; set; }
 
         [NotMapped]
         public SelectList? PatientsList { get; set; }

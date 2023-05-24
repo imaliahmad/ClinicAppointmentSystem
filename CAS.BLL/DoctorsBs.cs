@@ -16,10 +16,12 @@ namespace CAS.BLL
         bool Insert(Doctors obj);
         bool Update(Doctors obj);
         bool Delete(int id);
+        decimal GetDrFee(int id);
     }
     public class DoctorsBs : IDoctorsBs
     {
         private readonly IDoctorsDb objDb;
+
         public DoctorsBs(IDoctorsDb _objDb)
         {
             objDb = _objDb;
@@ -43,6 +45,11 @@ namespace CAS.BLL
         public bool Delete(int id)
         {
             return objDb.Delete(id);
+        }
+
+        public decimal GetDrFee(int id)
+        {
+           return objDb.GetDrFee(id);
         }
     }
 }

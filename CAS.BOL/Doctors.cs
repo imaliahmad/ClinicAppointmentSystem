@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CAS.BOL.DataTypes;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -18,12 +20,16 @@ namespace CAS.BOL
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Doctor Degree is required")]
-        public string Degree { get; set; }
-        public string Speciallity { get; set; }
-        public decimal Salary { get; set; }
-        public int PhoneNo { get; set; }
+        public DegreeTypes? Degree { get; set; } //int 0,1,2
+        public SpeciallityTypes? Speciallity { get; set; }
+        public string PhoneNo { get; set; }
+        public decimal DrFee { get; set; }
 
+        [NotMapped]
+        public SelectList? DegreeList { get; set; }
 
+        [NotMapped]
+        public SelectList? SpeciallityList { get; set; }
         public virtual IEnumerable<Appointments> Appointments { get; set; }
     }
 }

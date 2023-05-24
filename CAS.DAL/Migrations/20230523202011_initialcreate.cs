@@ -29,10 +29,10 @@ namespace CAS.DAL.Migrations
                     DId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Degree = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Speciallity = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Salary = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PhoneNo = table.Column<int>(type: "int", nullable: false)
+                    Degree = table.Column<int>(type: "int", nullable: false),
+                    Speciallity = table.Column<int>(type: "int", nullable: true),
+                    PhoneNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DrFee = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -48,7 +48,7 @@ namespace CAS.DAL.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNo = table.Column<int>(type: "int", nullable: false)
+                    PhoneNo = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -64,12 +64,12 @@ namespace CAS.DAL.Migrations
                     AppNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PId = table.Column<int>(type: "int", nullable: false),
                     DId = table.Column<int>(type: "int", nullable: false),
-                    AppDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DrFee = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Discount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    AfterDiscount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    FeeStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AppStatus = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    BillAmt = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    FeeStatus = table.Column<int>(type: "int", nullable: true),
+                    AppStatus = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
