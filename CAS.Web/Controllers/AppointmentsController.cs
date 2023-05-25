@@ -20,6 +20,11 @@ namespace CAS.Web.Controllers
             doctorsBs = _doctorsBs;
         }
 
+        //$(function(){
+        //});
+        //$(() => {}
+        //);
+
         /** 
          * This function is used to get appointment list
          **/

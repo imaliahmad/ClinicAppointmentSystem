@@ -62,22 +62,42 @@
                     </div>
                 </div>
                 <br />
-                <div class="row row-1">
-                    <div class="col-md-2">
-                       <label asp-for="DateTime" class="control-label"></label>
+                @if(Model.AppId > 0)
+                {
+                    <div class="row row-1">
+                        <div class="col-md-2">
+                           <label asp-for="DateTime" class="control-label"></label>
+                        </div>
+                        <div class="col-md-6">
+                           <input  asp-for="DateTime" id="datetime"  class="form-control" />
+                           <span asp-validation-for="DateTime"  class="text-danger"></span>
+                           <script>
+                              var datetimeInput = document.getElementById("datetime");
+                              var datetimeValue = '@Model.DateTime.ToString("yyyy-MM-ddTHH:mm")'; 
+                              datetimeInput.value = datetimeValue;
+                           </script>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                       <input  asp-for="DateTime" id="datetime" class="form-control" />
-                       <span asp-validation-for="DateTime" class="text-danger"></span>
-                       <script>
-                          var datetimeInput = document.getElementById("datetime");
-                          var now = new Date();
-                          var currentDateTime = now.toISOString().slice(0, 20).replace('T', ' ');
-                          datetimeInput.value = currentDateTime;
-                       </script>
-                       
-                    </div>
-                </div>
+                }
+                else
+                {
+                        <div class="row row-1">
+                            <div class="col-md-2">
+                               <label asp-for="DateTime" class="control-label"></label>
+                            </div>
+                            <div class="col-md-6">
+                               <input  asp-for="DateTime" id="datetime"  class="form-control" />
+                               <span asp-validation-for="DateTime"  class="text-danger"></span>
+                               <script>
+                                  var datetimeInput = document.getElementById("datetime");
+                                  var now = new Date();
+                                  var currentDateTime = now.toISOString().slice(0, 20).replace('T', ' ');
+                                  datetimeInput.value = currentDateTime;
+                               </script>
+                            </div>
+                        </div>
+                }
+                
                 <br />
                 <div class="row row-1">
                     <div class="col-md-2">
@@ -126,7 +146,7 @@
      $(document).ready(function () {
 
        $('#DId').change(function () {
-            debugger;
+            
          var selectedDoctorId = $(this).val();
          if (selectedDoctorId !== '') {
            $.ajax({
@@ -141,37 +161,39 @@
            });
          }
        });
-     });
- </script>
- <script>
-     $(document).ready(function () {
-        $('#Discount').change(function () {
-            var discount = parseFloat($(this).val());
-            var drFee = parseFloat($('#DrFee').val());
+        $('#DId').change(function () {
+
+         var selectedDoctorId = $(this).val();
+         if (selectedDoctorId !== '') {
+           $.ajax({
+             url: '/Doctors/GetDrFee/' + selectedDoctorId,
+             type: 'GET',
+             success: function (fee) {
+                 $('#BillAmt').val(fee);
+             },
+             error: function () {
+                 console.log('Error occurred.');
+             }
+           });
+         }
+       });
+       $('#Discount').change(function () {
+          var discount = parseFloat($(this).val());
+          var drFee = parseFloat($('#DrFee').val());
 
             if (!isNaN(discount) && !isNaN(drFee)) {
                 var BillAmt = drFee - discount;
                 $('#BillAmt').val(BillAmt.toFixed(2));
             }
-        });
-    });
- </script>
- <script>
- //$(function(){
- 
- //});
-
- //$(() => {}
- 
- //);
-
-
- $(document).ready(function () {
-     $('#btnSave').click(function() {
-         notyf.open ({ type:'success', message:'Appointment is saved.' });
+       });
+         $('#btnSave').click(function() {
+           notyf.open ({ type:'success', message:'Appointment is saved.' });
+         });
      });
- });
-</script>
+ </script>
+
+ 
+
  
 
 
