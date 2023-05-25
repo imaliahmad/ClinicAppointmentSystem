@@ -155,26 +155,26 @@
 
                 var appointments = result; 
                 console.log(appointments);
-                debugger;
                 $('#appointmentslist').empty();
 
-                var rows= '';
+                var row;
                 for(var item of appointments) 
-                {
-                   var row = '<tr>' +
+                { 
+                    //console.log(item.doctorName);
+                    //console.log(item.patientName);
+
+                    row += '<tr>' +
                                 '<td>' + item.appNo + '</td>' +
-                                '<td>' + item.patientName + '</td>' +
-                                '<td>' + item.doctorName + '</td>' +
+                                '<td>' + item.patients.name  + '</td>' +
+                                '<td>' + item.doctors.name  + '</td>' +
                                 '<td>' + item.dateTime + '</td>' +
                                 '<td>' + item.drFee + '</td>' +
                                 '<td>' + item.discount + '</td>' +
                                 '<td>' + item.billAmt + '</td>' +
                                 '</tr>';
-                    rows += row;
-
                 }
 
-                $('#appointmentslist').append(rows);
+                $('#appointmentslist').append(row);
 
             },
             error: function(error){
